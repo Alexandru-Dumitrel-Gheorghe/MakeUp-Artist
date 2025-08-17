@@ -13,11 +13,10 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
 
-    setDarkMode(savedTheme ? savedTheme === "dark" : systemPrefersDark);
+    // ✅ Light mode implicit
+    setDarkMode(savedTheme ? savedTheme === "dark" : false);
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -33,7 +32,7 @@ export default function Header() {
   return (
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}
-      data-theme={darkMode ? "dark" : ""}
+      data-theme={darkMode ? "dark" : "light"}
     >
       <div className={styles.container}>
         <div className={styles.logoWrapper}>
