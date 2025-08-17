@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -13,7 +14,6 @@ const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Verificăm preferința sistemului și localStorage pentru dark mode
     const savedMode = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
@@ -28,10 +28,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -59,10 +56,21 @@ const Header = () => {
       className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
     >
       <div className={styles.headerContainer}>
-        <div className={styles.logo} onClick={() => router.push("/")}>
-          <span className={styles.logoIcon}>✧</span>
-          <span className={styles.logoText}>ANDREEA GHEORGHE</span>
-        </div>
+        {/* CONTAINER LOGO – fixează spațiul pentru a evita layout shift */}
+        <Link
+          href="/"
+          className={styles.logoContainer}
+          aria-label="Mergi la pagina de start"
+        >
+          <Image
+            src="/logo-2.png"
+            alt="Beauty by Lumiere Logo"
+            width={200}
+            height={80}
+            priority
+            className={styles.logoImage}
+          />
+        </Link>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
           <div className={styles.navLinks}>
@@ -73,6 +81,7 @@ const Header = () => {
                 className={`${styles.navLink} ${
                   pathname === link.path ? styles.activeLink : ""
                 }`}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </Link>
@@ -82,7 +91,10 @@ const Header = () => {
           <div className={styles.headerActions}>
             <button
               className={styles.ctaButton}
-              onClick={() => router.push("/programare")}
+              onClick={() => {
+                setIsMenuOpen(false);
+                router.push("/programare");
+              }}
             >
               Programează-te
             </button>

@@ -9,6 +9,7 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   border-bottom: 1px solid var(--border);
+  height: 80px; /* Înălțime fixă */
 }
 
 .headerScrolled {
@@ -21,35 +22,39 @@
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1.5rem 2rem;
-  position: relative;
+  padding: 0 2rem;
+  height: 100%; /* Utilizează întreaga înălțime a header-ului */
 }
-
-.logo {
-  display: flex;
+.logoContainer {
+  grid-column: 2;
+  justify-self: center;
+  display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  z-index: 1001;
+  justify-content: center;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 1rem;
 }
 
-.logoIcon {
-  font-size: 2rem;
-  color: var(--primary);
+.logoImage {
+  height: 140px; /* Dimensiune fixă pentru logo */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.logoText {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
-  color: var(--foreground);
+.logoImage:hover {
+  transform: scale(1.05);
 }
 
 .nav {
   display: flex;
   align-items: center;
   gap: 2rem;
+  height: 100%;
 }
 
 .navLinks {
@@ -155,8 +160,16 @@
 
 /* Mobile styles */
 @media (max-width: 768px) {
+  .header {
+    height: 70px;
+  }
+
   .headerContainer {
-    padding: 1.25rem 1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .logoImage {
+    height: 120px;
   }
 
   .nav {
@@ -173,6 +186,7 @@
     opacity: 0;
     transition: all 0.5s ease;
     z-index: 1000;
+    padding-top: 70px; /* Spațiu pentru header */
   }
 
   .navOpen {
@@ -194,10 +208,6 @@
 
   .mobileMenuButton {
     display: block;
-  }
-
-  .logoText {
-    font-size: 1.25rem;
   }
 }
 
