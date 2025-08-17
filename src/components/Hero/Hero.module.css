@@ -1,0 +1,410 @@
+/* src/components/Hero/Hero.module.css */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 2rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    145deg,
+    var(--primary-light) 0%,
+    var(--background) 70%
+  );
+  z-index: -2;
+}
+
+[data-theme="dark"] .heroBackground {
+  background: linear-gradient(
+    145deg,
+    var(--primary-dark) 0%,
+    var(--background) 70%
+  );
+}
+
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 5rem;
+}
+
+.text {
+  flex: 1;
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+  padding: 2rem 0;
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(212, 165, 154, 0.3);
+}
+
+.heading {
+  font-size: 3.75rem;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 1.75rem;
+  color: var(--foreground);
+}
+
+.headingHighlight {
+  color: var(--primary-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.headingHighlight::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background-color: rgba(212, 165, 154, 0.3);
+  z-index: -1;
+  transform: skewY(-2deg);
+}
+
+.description {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  color: var(--text-muted);
+  max-width: 90%;
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.btnPrimary,
+.btnGhost {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btnPrimary {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: 2px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(212, 165, 154, 0.3);
+}
+
+.btnPrimary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(212, 165, 154, 0.4);
+}
+
+.btnGhost {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btnGhost:hover {
+  background-color: rgba(212, 165, 154, 0.1);
+  transform: translateY(-3px);
+}
+
+.btnIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  line-height: 1;
+  font-family: "Montserrat", sans-serif;
+}
+
+.statLabel {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.media {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.mediaDecoration {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 65%);
+  opacity: 0.15;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  transform: perspective(1000px) rotateY(-12deg) rotateX(2deg);
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mediaImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.imageWrapper:hover {
+  transform: perspective(1000px) rotateY(-8deg) rotateX(1deg);
+}
+
+.imageWrapper:hover .mediaImage {
+  transform: scale(1.03);
+}
+
+/* Mobile styles */
+@media (max-width: 1200px) {
+  .heading {
+    font-size: 3.25rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrap {
+    flex-direction: column-reverse;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .text {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .stats {
+    justify-content: center;
+  }
+
+  .headingHighlight::after {
+    bottom: 2px;
+    height: 10px;
+  }
+
+  .imageWrapper {
+    transform: none;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+    min-height: auto;
+  }
+
+  .heading {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stats {
+    gap: 1.5rem;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+  }
+
+  .actions {
+    gap: 1rem;
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+/* Păstrează toate stilurile existente și adaugă următoarele: */
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.btnPrimary,
+.btnGhost {
+  padding: 1rem 2rem;
+  min-width: 200px; /* Aceeași lățime pentru ambele butoane */
+  text-align: center;
+  justify-content: center;
+}
+
+.statsContainer {
+  margin-top: 2rem;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: rgba(212, 165, 154, 0.3);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  line-height: 1;
+  font-family: "Montserrat", sans-serif;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stats {
+    padding: 0.8rem 1rem;
+    gap: 1rem;
+  }
+
+  .statNumber {
+    font-size: 1.8rem;
+  }
+
+  .statLabel {
+    font-size: 0.85rem;
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    min-width: 160px;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    width: 100%;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .statDivider {
+    width: 60px;
+    height: 1px;
+  }
+}

@@ -1,0 +1,159 @@
+.section {
+  padding: 4rem 1rem;
+  background-color: var(--primary-light);
+}
+
+[data-theme="dark"] .section {
+  background-color: var(--primary-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--primary);
+  margin: 1rem auto 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Slider Container */
+.sliderContainer {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+/* Mobile Slider */
+.slider {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  min-width: 100%;
+  padding: 0 1rem;
+}
+
+/* Desktop Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.gridItem {
+  display: flex;
+  justify-content: center;
+}
+
+/* Navigation Buttons */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--background);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  color: var(--foreground);
+  z-index: 10;
+}
+
+.navButton:hover {
+  background: var(--primary);
+  color: var(--text-light);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.navButton:first-child {
+  left: 1rem;
+}
+
+.navButton:last-child {
+  right: 1rem;
+}
+
+/* Dots Navigation */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .sliderContainer {
+    display: none;
+  }
+
+  .dots {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    display: none;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+}

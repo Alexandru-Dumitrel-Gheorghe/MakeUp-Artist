@@ -1,0 +1,121 @@
+/* src/components/Footer/Footer.module.css */
+.footer {
+  background-color: var(--primary-light);
+  color: var(--foreground);
+  padding: 2rem 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 0 1.5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerSection {
+  margin-bottom: 1.5rem;
+}
+
+.footerHeading {
+  font-family: "Montserrat", sans-serif;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.footerText {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footerLinks {
+  list-style: none;
+}
+
+.footerLinks li {
+  margin-bottom: 0.5rem;
+}
+
+.footerLinks a {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.footerLinks a:hover {
+  color: var(--primary);
+}
+
+.contactInfo {
+  list-style: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary);
+  color: var(--text-light);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.socialIcons a:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.footerBottom {
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.legalLinks {
+  margin-top: 0.5rem;
+}
+
+.legalLinks a {
+  color: var(--text-light);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.legalLinks a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footerTop {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footerSection {
+    text-align: center;
+  }
+
+  .socialIcons {
+    justify-content: center;
+  }
+}
