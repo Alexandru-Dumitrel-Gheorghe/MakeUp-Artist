@@ -1,292 +1,189 @@
-/* ===== Fallback CSS vars (șterge dacă ai deja în globals.css) ===== */
-:root {
-  --background: #fffaf8;
-  --foreground: #1a1a1a;
-  --primary: #d4a59a;
-  --primary-dark: #c18b7e;
-}
-html[data-theme="dark"] {
-  --background: #0e0e0f;
-  --foreground: #f2f2f2;
-  --primary: #d4a59a;
-  --primary-dark: #b77f72;
-}
-
-/* ===== Header & Container ===== */
 .header {
   position: fixed;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.3s ease;
+  background-color: rgba(var(--background-rgb), 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border);
 }
 
-.header[data-theme="dark"] {
-  background: rgba(10, 10, 10, 0.7);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+.headerScrolled {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-.scrolled {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-.scrolled[data-theme="dark"] {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-.container {
+.headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
-  height: 74px;
-  transition: height 0.3s ease, padding 0.3s ease;
-}
-
-/* compact pe scroll */
-.scrolled .container {
-  height: 64px;
-}
-
-/* ===== Logo ===== */
-.logoWrapper {
+  padding: 1.5rem 2rem;
   position: relative;
-  height: 40px;
-  width: auto;
-  z-index: 1001;
-}
-
-.logoLink {
-  display: block;
-  height: 100%;
-  transition: transform 0.3s ease;
-}
-.logoLink:hover {
-  transform: translateZ(0) scale(1.03);
 }
 
 .logo {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) scale(1.35);
-  transform-origin: left center;
-  height: 64px;
-  width: auto;
-  transition: transform 0.3s ease, height 0.3s ease;
-  pointer-events: none;
-}
-.logoLink > .logo {
-  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1001;
 }
 
-.scrolled .logo {
-  transform: translateY(-50%) scale(1.15);
-  height: 56px;
+.logoIcon {
+  font-size: 2rem;
+  color: var(--primary);
 }
 
-/* ===== Nav ===== */
+.logoText {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: var(--foreground);
+}
+
 .nav {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
-.navLinks {
-  display: flex;
-  gap: 2rem;
-}
-
-.navLinks a {
+.navLink {
   position: relative;
   font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   font-size: 1rem;
-  font-weight: 500;
-  color: var(--foreground);
-  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.linkNumber {
+.navLink:hover {
   color: var(--primary);
-  font-size: 0.9rem;
-  font-weight: 400;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.navLinks a:hover .linkNumber {
-  opacity: 1;
 }
 
-.navLinks a::after {
+.navLink::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
-  background: var(--primary);
+  height: 1px;
+  background-color: var(--primary);
   transition: width 0.3s ease;
 }
-.navLinks a:hover::after {
+
+.navLink:hover::after {
   width: 100%;
 }
 
-/* ===== Actions ===== */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+.activeLink {
+  color: var(--primary);
+}
+
+.activeLink::after {
+  width: 100%;
 }
 
 .ctaButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--primary);
-  color: #ffffff !important;
-  padding: 0.8rem 1.8rem;
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 0.75rem 1.75rem;
   border-radius: 50px;
   font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(212, 165, 154, 0.3);
 }
-.ctaButton:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(212, 165, 154, 0.4);
-}
 
-.phoneIcon {
-  font-size: 0.9rem;
-}
-
-.themeToggle {
-  background: none;
-  border: none;
-  color: var(--foreground);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  transition: background 0.2s ease, transform 0.1s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.themeToggle:hover {
-  background: rgba(212, 165, 154, 0.12);
-}
-.themeToggle:active {
-  transform: scale(0.96);
-}
-
-/* ===== Mobile Styles ===== */
 .mobileMenuButton {
   display: none;
   background: none;
   border: none;
   color: var(--foreground);
+  font-size: 1.5rem;
   cursor: pointer;
-  z-index: 1002; /* peste overlay-ul meniului */
+  z-index: 1001;
 }
 
-@media (max-width: 1024px) {
-  .container {
-    height: 60px;
-    padding: 0 1.5rem;
-  }
-  .logoWrapper {
-    height: 36px;
-  }
-  .logo {
-    height: 58px;
-    transform: translateY(-50%) scale(1.25);
-  }
-  .scrolled .logo {
-    height: 52px;
-    transform: translateY(-50%) scale(1.12);
-  }
-}
-
+/* Mobile styles */
 @media (max-width: 768px) {
-  .container {
-    height: 56px;
-  }
-  .logoWrapper {
-    height: 34px;
-  }
-  .logo {
-    height: 64px;
-    transform: translateY(-50%) scale(1.2);
+  .headerContainer {
+    padding: 1.25rem 1.5rem;
   }
 
-  /* Overlay full-screen pentru nav pe mobil */
   .nav {
     position: fixed;
-    inset: 0;
-    background: transparent;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background);
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1001;
-    pointer-events: none; /* blocat cât timp e închis */
-  }
-  .nav.open {
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  .navBackground {
-    position: absolute;
-    inset: 0;
-    background: var(--background);
-    opacity: 0.98;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .navContent {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-    width: 100%;
-    padding: 2rem;
-  }
-
-  .navLinks {
-    flex-direction: column;
-    align-items: center;
     gap: 2rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1000;
   }
-  .navLinks a {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
-  }
-  .linkNumber {
+
+  .navOpen {
+    transform: translateY(0);
     opacity: 1;
   }
 
-  .actions {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
   .mobileMenuButton {
-    display: flex;
+    display: block;
   }
+
+  .logoText {
+    font-size: 1.25rem;
+  }
+}
+
+/* Animation for mobile menu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navOpen .navLink {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.navOpen .navLink:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.navOpen .navLink:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.navOpen .navLink:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.navOpen .navLink:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.navOpen .ctaButton {
+  animation: fadeIn 0.5s ease 0.5s forwards;
 }

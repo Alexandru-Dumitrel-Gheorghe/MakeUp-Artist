@@ -1,141 +1,78 @@
 "use client";
 
-import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import styles from "./Header.module.css";
-import { useEffect, useState } from "react";
-import { FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
-import { FaPhoneAlt } from "react-icons/fa";
 
-export default function Header() {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  // Light implicit: false = light
-  const [darkMode, setDarkMode] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Mount: citim tema salvată și listener de scroll
+  // Scroll effect
   useEffect(() => {
-    const savedTheme =
-      typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    if (savedTheme === "dark") setDarkMode(true); // altfel rămâne light implicit
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
 
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Aplicăm tema la <html> + persistăm
+  // Închide meniul când se schimbă ruta
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.setAttribute(
-        "data-theme",
-        darkMode ? "dark" : "light"
-      );
-      localStorage.setItem("theme", darkMode ? "dark" : "light");
-    }
-  }, [darkMode]);
+    setIsMenuOpen(false);
+  }, [pathname]);
 
-  // Blochează scroll-ul pe body când meniul mobil e deschis
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <header
-      className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}
-      data-theme={darkMode ? "dark" : "light"}
+      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
     >
-      <div className={styles.container}>
-        {/* Logo */}
-        <div className={styles.logoWrapper}>
-          <Link href="/" className={styles.logoLink} aria-label="Acasă">
-            {/* las imaginea simplă pentru NUI/SSR stabil */}
-            <img
-              src="/logo-andreea.png"
-              alt="Andreea G Makeup Artist"
-              className={styles.logo}
-              width={120}
-              height={64}
-            />
-          </Link>
+      <div className={styles.headerContainer}>
+        <div className={styles.logo} onClick={() => router.push("/")}>
+          <span className={styles.logoIcon}>✧</span>
+          <span className={styles.logoText}>ANDREEA G.</span>
         </div>
 
-        {/* Buton meniu mobil */}
         <button
           className={styles.mobileMenuButton}
-          onClick={() => setMobileMenuOpen((v) => !v)}
-          aria-label={mobileMenuOpen ? "Închide meniul" : "Deschide meniul"}
-          aria-expanded={mobileMenuOpen}
-          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          {isMenuOpen ? "✕" : "☰"}
         </button>
 
-        {/* Nav */}
-        <nav
-          id="primary-navigation"
-          className={`${styles.nav} ${mobileMenuOpen ? styles.open : ""}`}
-        >
-          <div className={styles.navBackground} aria-hidden />
-
-          <div className={styles.navContent}>
-            <div className={styles.navLinks} role="menu">
-              <Link
-                href="/despre"
-                onClick={() => setMobileMenuOpen(false)}
-                role="menuitem"
-              >
-                <span className={styles.linkNumber}>01.</span> Despre
-              </Link>
-              <Link
-                href="/servicii"
-                onClick={() => setMobileMenuOpen(false)}
-                role="menuitem"
-              >
-                <span className={styles.linkNumber}>02.</span> Servicii
-              </Link>
-              <Link
-                href="/portofoliu"
-                onClick={() => setMobileMenuOpen(false)}
-                role="menuitem"
-              >
-                <span className={styles.linkNumber}>03.</span> Portofoliu
-              </Link>
-              <Link
-                href="/tarife"
-                onClick={() => setMobileMenuOpen(false)}
-                role="menuitem"
-              >
-                <span className={styles.linkNumber}>04.</span> Tarife
-              </Link>
-            </div>
-
-            <div className={styles.actions}>
-              <Link
-                href="/contact"
-                className={styles.ctaButton}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <FaPhoneAlt className={styles.phoneIcon} />
-                Programează-te
-              </Link>
-
-              <button
-                className={styles.themeToggle}
-                onClick={() => setDarkMode((v) => !v)}
-                aria-label={
-                  darkMode ? "Treci pe mod luminos" : "Treci pe mod întunecat"
-                }
-              >
-                {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-              </button>
-            </div>
-          </div>
+        <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
+          {navLinks.map((link) => (
+            <a
+              key={link.path}
+              href={link.path}
+              className={`${styles.navLink} ${
+                pathname === link.path ? styles.activeLink : ""
+              }`}
+            >
+              {link.name}
+            </a>
+          ))}
+          <button
+            className={styles.ctaButton}
+            onClick={() => router.push("/book-now")}
+          >
+            Book Now
+          </button>
         </nav>
       </div>
     </header>
   );
-}
+};
+
+export default Header;
