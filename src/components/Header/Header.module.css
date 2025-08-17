@@ -1,3 +1,17 @@
+/* ===== Fallback CSS vars (șterge dacă ai deja în globals.css) ===== */
+:root {
+  --background: #fffaf8;
+  --foreground: #1a1a1a;
+  --primary: #d4a59a;
+  --primary-dark: #c18b7e;
+}
+html[data-theme="dark"] {
+  --background: #0e0e0f;
+  --foreground: #f2f2f2;
+  --primary: #d4a59a;
+  --primary-dark: #b77f72;
+}
+
 /* ===== Header & Container ===== */
 .header {
   position: fixed;
@@ -7,19 +21,20 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
 }
 
 .header[data-theme="dark"] {
-  background: rgba(10, 10, 10, 0.8);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  background: rgba(10, 10, 10, 0.7);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
 }
 
 .scrolled {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 .scrolled[data-theme="dark"] {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .container {
@@ -29,22 +44,21 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 74px; /* <<< HEADER MIC, FIX */
+  height: 74px;
   transition: height 0.3s ease, padding 0.3s ease;
-  overflow: visible;
 }
 
+/* compact pe scroll */
 .scrolled .container {
-  height: 64px; /* puțin mai mic la scroll */
+  height: 64px;
 }
 
 /* ===== Logo ===== */
 .logoWrapper {
   position: relative;
-  height: 40px; /* spațiul pe care îl rezervă în layout */
+  height: 40px;
   width: auto;
   z-index: 1001;
-  overflow: visible; /* permite logo-ului să „iasă” vizual */
 }
 
 .logoLink {
@@ -56,21 +70,20 @@
   transform: translateZ(0) scale(1.03);
 }
 
-/* Logo mare, dar nu mărește headerul: e poziționat ABSOLUT și scalat */
 .logo {
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%) scale(1.35); /* <<< ajustează cât de mare vrei */
+  transform: translateY(-50%) scale(1.35);
   transform-origin: left center;
-  height: 64px; /* dimensiunea reală a imaginii */
+  height: 64px;
   width: auto;
   transition: transform 0.3s ease, height 0.3s ease;
-  pointer-events: none; /* clicul rămâne pe Link (păstrează accesibilitatea) */
+  pointer-events: none;
 }
 .logoLink > .logo {
   pointer-events: auto;
-} /* dar permite click pe logo */
+}
 
 .scrolled .logo {
   transform: translateY(-50%) scale(1.15);
@@ -140,13 +153,13 @@
   align-items: center;
   gap: 0.5rem;
   background: var(--primary);
-  color: white !important;
+  color: #ffffff !important;
   padding: 0.8rem 1.8rem;
   border-radius: 50px;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   box-shadow: 0 4px 15px rgba(212, 165, 154, 0.3);
 }
 .ctaButton:hover {
@@ -166,24 +179,26 @@
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .themeToggle:hover {
-  background: rgba(212, 165, 154, 0.1);
-  color: var(--primary);
+  background: rgba(212, 165, 154, 0.12);
+}
+.themeToggle:active {
+  transform: scale(0.96);
 }
 
-/* ===== Mobile ===== */
+/* ===== Mobile Styles ===== */
 .mobileMenuButton {
   display: none;
   background: none;
   border: none;
   color: var(--foreground);
   cursor: pointer;
-  z-index: 1001;
+  z-index: 1002; /* peste overlay-ul meniului */
 }
 
 @media (max-width: 1024px) {
@@ -216,20 +231,42 @@
     transform: translateY(-50%) scale(1.2);
   }
 
+  /* Overlay full-screen pentru nav pe mobil */
   .nav {
     position: fixed;
     inset: 0;
-    background: var(--background);
+    background: transparent;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 3rem;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1000;
+    z-index: 1001;
+    pointer-events: none; /* blocat cât timp e închis */
   }
   .nav.open {
     transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .navBackground {
+    position: absolute;
+    inset: 0;
+    background: var(--background);
+    opacity: 0.98;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .navContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+    padding: 2rem;
   }
 
   .navLinks {
