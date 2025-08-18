@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import StickyBooker from "@/components/StickyBooker/StickyBooker";
 
 export const metadata: Metadata = {
   title: "Mia Bella Makeup | Machiaj profesional în București",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <StickyBooker />
       </body>
     </html>
   );
