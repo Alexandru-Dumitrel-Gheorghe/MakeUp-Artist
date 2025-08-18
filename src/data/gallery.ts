@@ -7,7 +7,7 @@ interface GalleryItem {
 
 const gallery: GalleryItem[] = [
   {
-    src: "/images/test-andreea.png",
+    src: "/images/galerie1.png",
     alt: "Machiaj natural luminos",
     caption: "Natural Glow",
     category: "everyday",

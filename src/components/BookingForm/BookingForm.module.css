@@ -1,0 +1,194 @@
+.bookingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.bookingContainer {
+  position: relative;
+  background-color: var(--background);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: var(--primary);
+}
+
+.bookingTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--foreground);
+  text-align: center;
+  font-weight: 400;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.formGroup {
+  margin-bottom: 0.5rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formRow .formGroup {
+  flex: 1;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  color: var(--foreground);
+  font-weight: 300;
+  font-size: 0.95rem;
+}
+
+.formInput,
+.formTextarea,
+.formSelect {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(212, 165, 154, 0.3);
+}
+
+.formTextarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submitButton {
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 165, 154, 0.3);
+}
+
+.submitButton:disabled {
+  background-color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.successMessage {
+  text-align: center;
+  color: var(--primary-dark);
+  font-family: "Montserrat", sans-serif;
+  padding: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.errorMessage {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .bookingContainer {
+    padding: 1.8rem;
+  }
+
+  .bookingTitle {
+    font-size: 1.5rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookingContainer {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .bookingTitle {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .formInput,
+  .formTextarea,
+  .formSelect {
+    padding: 0.7rem 0.9rem;
+  }
+}
