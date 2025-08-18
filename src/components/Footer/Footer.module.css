@@ -1,4 +1,3 @@
-/* src/components/Footer/Footer.module.css */
 .footer {
   background-color: var(--primary-light);
   color: var(--foreground);
@@ -69,17 +68,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   background-color: var(--primary);
   color: var(--text-light);
   border-radius: 50%;
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .socialIcons a:hover {
   background-color: var(--primary-dark);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .footerBottom {

@@ -9,7 +9,7 @@ export default function About() {
         <div className={styles.imageWrapper}>
           <div className={styles.imageContainer}>
             <Image
-              src="/images/about-andr.png"
+              src="/images/about-andreea.png"
               alt="Mia Bella - Makeup Artist"
               width={600}
               height={800}

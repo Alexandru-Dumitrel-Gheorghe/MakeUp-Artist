@@ -1,6 +1,6 @@
-// src/components/Footer/Footer.tsx
 import styles from "./Footer.module.css";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -40,14 +40,29 @@ export default function Footer() {
             <li>Email: contact@miabellamakeup.com</li>
             <li>Telefon: +40 721 123 456</li>
             <li className={styles.socialIcons}>
-              <a href="#" aria-label="Facebook">
-                <span className={styles.icon}>f</span>
+              <a
+                href="https://www.facebook.com/iulian.gheorghe.18?locale=de_DE"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
+                <FaFacebookF />
               </a>
-              <a href="#" aria-label="Instagram">
-                <span className={styles.icon}>ig</span>
+              <a
+                href="https://www.instagram.com/andreea_gheorghe12/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <FaInstagram />
               </a>
-              <a href="#" aria-label="Pinterest">
-                <span className={styles.icon}>p</span>
+              <a
+                href="https://www.tiktok.com/@andreeagheorghe3?is_from_webapp=1&sender_device=pc"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+              >
+                <FaTiktok />
               </a>
             </li>
           </ul>

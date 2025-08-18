@@ -7,19 +7,19 @@ export default function Hero() {
       <div className={styles.heroBackground}></div>
       <div className={styles.wrap}>
         <div className={styles.text}>
-          <div className={styles.badge}>Profesional Makeup Artist</div>
+          <div className={styles.badge}>Make-up Artist Profesionist</div>
           <h1 className={styles.heading}>
-            <span className={styles.headingHighlight}>Elegance</span> și
-            sofisticare în fiecare pensulă
+            <span className={styles.headingHighlight}>Eleganță</span> și
+            rafinament la fiecare machiaj
           </h1>
           <p className={styles.description}>
-            Transformăm caracteristicile tale unice în opere de artă efemere,
-            perfecte pentru mirese, evenimente speciale sau ședințe foto.
+            Evidențiez frumusețea ta naturală prin machiaje personalizate,
+            ideale pentru mirese, evenimente speciale și ședințe foto.
           </p>
 
           <div className={styles.actions}>
             <Link href="/servicii" className={styles.btnPrimary}>
-              Explorează serviciile
+              Descoperă serviciile
               <svg className={styles.btnIcon} viewBox="0 0 24 24" fill="none">
                 <path
                   d="M5 12H19M19 12L12 5M19 12L12 19"
@@ -39,12 +39,12 @@ export default function Hero() {
             <div className={styles.stats}>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>10+</span>
-                <span className={styles.statLabel}>Ani experiență</span>
+                <span className={styles.statLabel}>Ani de experiență</span>
               </div>
               <div className={styles.statDivider}></div>
               <div className={styles.statItem}>
                 <span className={styles.statNumber}>500+</span>
-                <span className={styles.statLabel}>Clienți fericiți</span>
+                <span className={styles.statLabel}>Cliente fericite</span>
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function Hero() {
           <div className={styles.imageWrapper}>
             <img
               src="/images/hero-mackeup.png"
-              alt="Machiaj profesional"
+              alt="Machiaj profesional realizat de artist"
               className={styles.mediaImage}
               loading="eager"
             />
